@@ -1,0 +1,251 @@
+% %%%%%%%%%%%%%%%%%%%%%%
+% %%   Complex2.sty   %%
+% %%%%%%%%%%%%%%%%%%%%%%
+
+% Last modified at January 25, 2021
+
+\ProvidesPackage{Complex2}
+
+\newif\ifopchinese
+\newif\ifopdraft
+
+\DeclareOption{chinese}{\opchinesetrue}
+\DeclareOption{draft}{\opdrafttrue}
+
+\ProcessOptions\relax
+
+% Setting up title, author, date and so on
+\ifx \ntitle\undefined
+  \def\ntitle{Template}
+\else
+\fi
+
+\ifx \ndate\undefined
+  \def\ndate{\today}
+\else
+\fi
+
+\ifx \nauthor\undefined
+  \def\nauthor{Complex2- Liu}
+\else
+\fi
+
+\ifx \nemail\undefined
+  \def\nemail{complex2liu@complex2math.com}
+\else
+\fi
+
+\ifx \nmotto\undefined
+    \def\nomotto{There is more than one way to skin a cat.}
+\else
+\fi
+
+\title{\ntitle}
+\author{\nauthor}
+\date{\ndate}
+
+% 设置中文
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=SimHei, ItalicFont=KaiTi]{SimSun}
+\linespread{1.5}
+
+% 设置页边距
+\usepackage[margin = 1.5in, a4paper]{geometry}
+
+\usepackage{amsmath,amssymb,amsthm}
+\def\th@plain{
+  \thm@headfont{\bfseries\sffamily}
+  \thm@notefont{\normalfont\rmfamily}
+  \itshape
+}
+\def\th@definition{
+  \thm@headfont{\bfseries\sffamily}
+  \thm@notefont{\normalfont\rmfamily}
+  \normalfont
+}
+\usepackage[svgnames,dvipsnames]{xcolor}
+\usepackage{mathtools}
+\usepackage{euscript} % Eu数学字体
+\usepackage{mathrsfs} % 数学花体字母
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{empheq} % Emphasizing equations
+\usepackage{indentfirst} % 首行缩进
+\usepackage{tikz-cd} % 交换图表
+\usepackage{enumerate}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\fancypagestyle{mypagestyle}{
+    \fancyhf{}
+    \lhead{\nouppercase{\leftmark}}
+    \rhead{\scshape\nauthor}
+    \cfoot{\thepage}
+}
+\pagestyle{mypagestyle}
+
+% 超链接, 见: https://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+\definecolor{darkgreen}{HTML}{006400}
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={\ntitle},
+    pdfauthor={\nauthor},
+    pdfsubject={Mathematics},
+    colorlinks=true,
+    linkcolor={red!50!black},
+    citecolor={darkgreen},
+    urlcolor={blue!80!black},
+    pdfview=Fit
+}
+\usepackage[nameinlink]{cleveref}
+
+% Sections and subsections
+\usepackage{titlesec}
+\titleformat{\section}
+{\Large\sffamily\bfseries}
+{\textcolor{red!80!black}{\textnormal{\textsf{\S}}\thesection.}}{0.5em}{}
+\titleformat{\subsection}
+{\large\sffamily\bfseries}
+{\textcolor{red!80!black}{\textnormal{\textsf{\S}}\thesubsection.}}{0.5em}{}
+\newcommand{\sectionbreak}{\clearpage}
+
+\ifopchinese
+    \def\namethm{定理}
+    \def\namecor{推论}
+    \def\namelem{引理}
+    \def\nameprop{命题}
+    \def\nameaxiom{公理}
+    \def\namedefin{定义}
+    \def\nameexmp{例}
+    \def\nameprob{问题}
+    \def\namerem{注}
+    \def\namenotation{记号}
+\else
+    \def\namethm{Theorem}
+    \def\namecor{Corollary}
+    \def\namelem{Lemma}
+    \def\nameprop{Proposition}
+    \def\nameaxiom{Axiom}
+    \def\namedefin{Definition}
+    \def\nameexmp{Example}
+    \def\nameprob{Problem}
+    \def\namerem{Remark}
+    \def\namenotation{Notation}
+    \Crefname{thm}{Theorem}{Theorems}
+    \Crefname{cor}{Corollary}{Corollaries}
+    \Crefname{lem}{Lemma}{Lemmas}
+    \Crefname{prop}{Proposition}{Propositions}
+    \Crefname{axiom*}{Axiom}{Axioms}
+    \Crefname{defin}{Definition}{Definitions}
+    \Crefname{exmp}{Example}{Examples}
+    \Crefname{prob}{Problem}{Problems}
+    \Crefname{rem}{Remark}{Remarks}
+\fi
+
+\ifopdraft
+\newtheorem{thm}{\namethm}
+\newtheorem{cor}[thm]{\namecor}
+\newtheorem{lem}[thm]{\namelem}
+\newtheorem{prop}[thm]{\nameprop}
+\newtheorem*{axiom*}{\nameaxiom}
+
+\newenvironment{soln}[1][Solution]
+{\par\noindent\iit{#1.} }
+{\par}
+\newenvironment{claim}[1][Claim]
+{\par\medskip\noindent\bbf{#1.} }
+{\par\medskip}
+
+\theoremstyle{definition}
+\newtheorem{defin}{\namedefin}
+\newtheorem{exmp}{\nameexmp}
+\newtheorem{prob}{\nameprob}
+\newtheorem*{rem}{\namerem}
+\newtheorem*{notation}{\namenotation}
+\else
+\newtheorem{thm}{\namethm}[section]
+\newtheorem{cor}[thm]{\namecor}
+\newtheorem{lem}[thm]{\namelem}
+\newtheorem{prop}[thm]{\nameprop}
+\newtheorem*{axiom*}{\nameaxiom}
+
+\newenvironment{soln}[1][Solution]
+{\par\noindent\iit{#1.} }
+{\par}
+\newenvironment{claim}[1][Claim]
+{\par\medskip\noindent\bbf{#1.} }
+{\par\medskip}
+
+\theoremstyle{definition}
+\newtheorem{defin}{\namedefin}[section]
+\newtheorem{exmp}{\nameexmp}[section]
+\newtheorem{prob}{\nameprob}[section]
+\newtheorem*{rem}{\namerem}
+\newtheorem*{notation}{\namenotation}
+\numberwithin{equation}{section}
+\fi
+
+\AtBeginDocument{\renewcommand*{\setminus}{\mathbin{\backslash}}}
+\AtBeginDocument{\let\Re\relax}
+\AtBeginDocument{\let\Im\relax}
+\AtBeginDocument{\DeclareMathOperator{\Re}{Re}}
+\AtBeginDocument{\DeclareMathOperator{\Im}{Im}}
+\AtBeginDocument{
+   \setlength\abovedisplayskip{2pt}
+   \setlength\belowdisplayskip{2pt}
+}
+
+% operator macros
+
+% Basic
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\defeq}{\coloneqq}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\innerp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\paren}{(}{)}
+\DeclarePairedDelimiter{\bracket}{[}{]}
+\newcommand*{\divides}{\mid}
+\newcommand*{\ndivides}{\nmid}
+\newcommand*{\V}[1]{{\mathbf{#1}}}
+\newcommand*{\ol}[1]{\overline{#1}}
+\newcommand*{\embed}{\hookrightarrow}
+\newcommand*{\surj}{\twoheadrightarrow}
+\newcommand*{\powerset}{\mathcal{P}}
+\newcommand{\bbf}[1]{\textbf{#1}}
+\newcommand{\iit}[1]{\textit{#1}}
+\renewcommand{\emph}[1]{\textcolor{blue}{\textit{#1}}}
+\newcommand{\eucal}[1]{\EuScript{#1}}
+
+% Algebra
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclarePairedDelimiter{\generation}{\langle}{\rangle}
+\newcommand*{\normal}{\trianglelefteq}
+
+% Group
+\DeclareMathOperator{\GL}{GL}
+
+% Matrix
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\adj}{adj}
+
+%field, galois heory
+\DeclareMathOperator{\ch}{char}
+\DeclareMathOperator{\Gal}{Gal}
+
+% fields
+\newcommand*{\CC}{{\mathbb{C}}}
+\newcommand*{\RR}{{\mathbb{R}}}
+\newcommand*{\QQ}{{\mathbb{Q}}}
+\newcommand*{\ZZ}{{\mathbb{Z}}}
+\newcommand*{\NN}{{\mathbb{N}}}
+\newcommand*{\FF}{{\mathbb{F}}}
+
+%probability
+\newcommand*{\E}{\mathbb{E}}

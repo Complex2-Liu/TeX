@@ -1,0 +1,35 @@
+\begin{titlepage}
+\bookmark[page = 1, level = 1]{Cover}
+\renewcommand*{\thepage}{C1}
+    \begin{center}
+    {\color{red!80!black}{\rule{\textwidth}{1.6pt}}}\vspace*{0.5cm}
+
+    {\Huge \bfseries \ntitle \par}
+    \vspace*{0.5cm}
+
+    {\color{red!80!black}{\rule{\textwidth}{1.6pt}}}
+    \\[1cm]
+
+    \ifx \ndescription\undefined
+    \else
+        \begin{minipage}[h]{0.75\textwidth}
+        \small
+        \ndescription
+        \end{minipage}
+        \vspace*{1cm}
+    \fi
+
+    {\large \ndate \par}
+    \vspace{0.5cm}
+    {\Large \scshape \nauthor \par}
+    \vspace{0.2cm}
+    {\url{\nemail}}
+    \vfill
+    {\color{blue} \large \itshape \nmotto}
+    \end{center}
+\end{titlepage}
+\pagenumbering{roman}
+\tableofcontents
+\bookmark[page = 2, level = 1]{Table of Contents}
+\clearpage
+\pagenumbering{arabic}
