@@ -55,16 +55,6 @@
 \usepackage[margin = 1.5in, a4paper]{geometry}
 
 \usepackage{amsmath,amssymb,amsthm}
-\def\th@plain{
-  \thm@headfont{\bfseries\sffamily}
-  \thm@notefont{\normalfont\rmfamily}
-  \itshape
-}
-\def\th@definition{
-  \thm@headfont{\bfseries\sffamily}
-  \thm@notefont{\normalfont\rmfamily}
-  \normalfont
-}
 \usepackage[svgnames,dvipsnames]{xcolor}
 \usepackage{mathtools}
 \usepackage{euscript} % Eu数学字体
@@ -80,7 +70,11 @@
 \usepackage{fancyhdr}
 \fancypagestyle{mypagestyle}{
     \fancyhf{}
+    \ifopdraft
+    \lhead{\nouppercase{\ntitle}}
+    \else
     \lhead{\nouppercase{\leftmark}}
+    \fi
     \rhead{\scshape\nauthor}
     \cfoot{\thepage}
 }
@@ -195,8 +189,8 @@
 \AtBeginDocument{\DeclareMathOperator{\Re}{Re}}
 \AtBeginDocument{\DeclareMathOperator{\Im}{Im}}
 \AtBeginDocument{
-   \setlength\abovedisplayskip{2pt}
-   \setlength\belowdisplayskip{2pt}
+   \setlength\abovedisplayskip{4pt}
+   \setlength\belowdisplayskip{4pt}
 }
 
 % operator macros

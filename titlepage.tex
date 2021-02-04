@@ -28,8 +28,11 @@
     {\color{darkgreen} \large \itshape \nmotto}
     \end{center}
 \end{titlepage}
-\pagenumbering{roman}
-\tableofcontents
-\bookmark[page = 2, level = 1]{Table of Contents}
-\clearpage
+\ifopdraft
+\else
+    \pagenumbering{roman}
+    \tableofcontents
+    \bookmark[page = 2, level = 1]{Table of Contents}
+    \clearpage
+\fi
 \pagenumbering{arabic}
